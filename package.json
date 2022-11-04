@@ -1,0 +1,15 @@
+{
+  "name": "playwright-race-condition",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ThibaultJanBeyer/playwright-race-condition.git",
+  "author": "Thibault Jan Beyer <thibault-jan.beyer@klarna.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.27.1",
+    "playwright": "^1.27.1"
+  },
+  "scripts": {
+    "test": "playwright test"
+  }
+}

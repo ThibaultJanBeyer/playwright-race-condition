@@ -1,0 +1,43 @@
+<div>Foo</div>
+<script>
+    window.down = []
+    window.up = []
+    window.move = []
+
+    class PubSub {
+        subscribers = {}
+        subscribe = (eventName, callback) => {
+            if (!Array.isArray(this.subscribers[eventName])) this.subscribers[eventName] = []
+            this.subscribers[eventName].push(callback)
+            return this.subscribers[eventName].length - 1
+        }
+        publish = (eventName, data) => {
+            const subscribers = this.subscribers[eventName]
+            if (!Array.isArray(subscribers)) return
+            for (let i = 0, il = subscribers.length; i < il; i++) {
+                subscribers[i](data)
+            }
+        }
+    }
+    const PS = new PubSub()
+
+    PS.subscribe(`down`, (e) => window.down.push(e))
+    PS.subscribe(`up`, (e) => window.up.push(e))
+    PS.subscribe(`move`, (e) => window.move.push(e))
+
+    document.addEventListener('mousedown', (event) => {
+        setTimeout(() => PS.publish(`down`, { event }), 
+            Math.floor(Math.random() * 10)
+        )
+    });
+    document.addEventListener('mouseup', (event) => {
+        setTimeout(() => PS.publish(`up`, { event }),
+            Math.floor(Math.random() * 10)
+        )
+    });
+    document.addEventListener('mousemove', (event) => {
+        setTimeout(() => PS.publish(`move`, { event }),
+            Math.floor(Math.random() * 10)
+        )
+    });
+</script>
