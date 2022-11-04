@@ -25,19 +25,33 @@
     PS.subscribe(`up`, (e) => window.up.push(e))
     PS.subscribe(`move`, (e) => window.move.push(e))
 
-    document.addEventListener('mousedown', (event) => {
-        setTimeout(() => PS.publish(`down`, { event }), 
-            Math.floor(Math.random() * 15)
-        )
+    const heavyComputation = (complexity = 6050) => {
+        for (let index = 0; index < complexity; index++) {
+            const element = document.createElement('span')
+            document.body.append(element)
+            document.querySelector('span').getBoundingClientRect()
+            document.body.removeChild(element)
+        }
+    }
+
+    // async example
+    document.addEventListener('mousedown', async (event) => {
+        await new Promise((resolve) => {
+            heavyComputation()
+            resolve()
+        })
+        PS.publish(`down`, { event })
     });
+
+    // web api
     document.addEventListener('mouseup', (event) => {
         setTimeout(() => PS.publish(`up`, { event }),
-            Math.floor(Math.random() * 15)
+            Math.floor(Math.random() * 5)
         )
     });
+
+    // sync example
     document.addEventListener('mousemove', (event) => {
-        setTimeout(() => PS.publish(`move`, { event }),
-            Math.floor(Math.random() * 15)
-        )
+        PS.publish(`move`, { event })
     });
 </script>

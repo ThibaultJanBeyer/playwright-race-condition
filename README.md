@@ -5,11 +5,12 @@
 ## Explanation
 - The problem happens when in between the mouse movement and the listening of events computing is happening
 - In the test.html I faked such a behavior with a setTimeout
-- In real live this could be a lot of things, a timeout, an async action, computational heavy method like multiple .getBoundingClientRect or a lot of other things that take time
+- In real live this could be a lot of things, a timeout, an async action, computational heavy method like multiple .getBoundingClientRect or a lot of other things that take time (see in the test.html the 3 examples that can cause flakyness)
 - In this scenario not all mouse events are properly registered in the end
 
 ## Solution ideas
-If there was a way to wait for any hanging processes to finish between two mouse interactions, this would solve the problem
+- Would waiting for any hanging processes to finish between mouse interactions solve the issue? (is this possible?)
+- Would adding a delay between each mouse.move step solve the issue?
 
 ## Context
 - Playwright Version: 1.27.1
