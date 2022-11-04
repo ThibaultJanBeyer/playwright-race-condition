@@ -27,17 +27,17 @@
 
     document.addEventListener('mousedown', (event) => {
         setTimeout(() => PS.publish(`down`, { event }), 
-            Math.floor(Math.random() * 10)
+            Math.floor(Math.random() * 11)
         )
     });
     document.addEventListener('mouseup', (event) => {
         setTimeout(() => PS.publish(`up`, { event }),
-            Math.floor(Math.random() * 10)
+            Math.floor(Math.random() * 11)
         )
     });
     document.addEventListener('mousemove', (event) => {
         setTimeout(() => PS.publish(`move`, { event }),
-            Math.floor(Math.random() * 10)
+            Math.floor(Math.random() * 11)
         )
     });
 </script>
